@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import FriendCard from "./components/FriendCard";
-// import Wrapper from "./components/Wrapper";
 import friends from "./friends.json";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Listing from "./components/table"
@@ -22,18 +20,22 @@ class App extends Component {
 
 // Sort on any header column
 // label is the text passed in from the onclick event
+// use bracket notation for objects
   handleSort = (label) => {
     console.log("clicked", label)
     let sortFriends = this.state.friends
+    // if the state of name, location, occupation is true, then sort ascending
     if(this.state[label]){
       sortFriends.sort((a, b) => (a[label] > b[label]) ? 1 : -1)
+         // if the state of name, location, occupation is false, then sort descending
     }else{
       sortFriends.sort((a, b) => (a[label] > b[label]) ? -1 : 1)
     }
-    //update state of sort = !this.state.sort and friends
+    //update state of sort to be the opposite of what it was
     this.setState({[label]: !this.state[label], friend:sortFriends})
   }
 
+  // this is for sorting just the name column
   // handleSort = () => {
   //   console.log("clicked:")
   //   let sortFriends = this.state.friends
@@ -49,6 +51,7 @@ class App extends Component {
   handleSearchChange = event => {
     console.log(event.target.value);
     const filter = event.target.value;
+    // always start with the original list when use the filter
     const filteredList = this.state.original.filter(item => {
       // merge data together, then see if user input is anywhere inside
       let values = Object.values(item)
@@ -62,7 +65,6 @@ class App extends Component {
   render() {
     console.log(this.props);
     return (
-      //   <Wrapper>
       <div>
         <SearchBox
           handleSearchChange={this.handleSearchChange}
@@ -74,9 +76,11 @@ class App extends Component {
               <th></th>
               <th onClick={()=>this.handleSort("name")}>Name</th>
               <th onClick={()=>this.handleSort("location")}>Location</th>
+              <th onClick={()=>this.handleSort("occupation")}>Occupation</th>
+              {/* Below is for sort on name only  */}
               {/* <th onClick={this.handleSort}>Name</th> */}
-              {/* <th onClick={this.handleSort("location")}>Location</th> */}
-              <th>Occupation</th>
+              {/*<th>Location</th> */}
+              {/* <th>Occupation</th> */}
             </tr>
           </thead>
           <tbody>

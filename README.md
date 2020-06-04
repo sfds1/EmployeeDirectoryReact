@@ -11,7 +11,7 @@ Given a table of random users, when the user loads the page, a table of employee
 
 The user will be able to:
 
-  * Sort the table by at least one category
+  * Sort the table by any column header
 
   * Filter the users by at least one property.
 
@@ -46,7 +46,7 @@ React, Bootstrap, Axios
 
 ## Screenshot
 
-![](images/main.png)
+
 
 
 
