@@ -53,10 +53,14 @@ class App extends Component {
     const filter = event.target.value;
     // always start with the original list when use the filter
     const filteredList = this.state.original.filter(item => {
-      // merge data together, then see if user input is anywhere inside
-      let values = Object.values(item)
-        .join("")
-        .toLowerCase();
+    // if only want to search certain fields then can concatenate them with +.  They are strings
+      let values = (item.name +' '+ item.location + ' ' + item.occupation).toLowerCase()
+      console.log("values:", values)
+  // merge data together, then see if user input is anywhere inside
+      // values = values.join("").toLowerCase();
+      // let values = Object.values(item)
+        // .join("")
+        // .toLowerCase();
       return values.indexOf(filter.toLowerCase()) !== -1;
     });
     this.setState({ friends: filteredList });
